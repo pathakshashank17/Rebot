@@ -1,6 +1,6 @@
 <h1 align="center">Rebot</h1>
 
-<h4 align="center">Rebot is a whatsapp bot built upon Twilio's APIs, ExpressJS and MongoDB. It can send reminders through text messages in whatsapp.</h4>
+<h4 align="center">Rebot (REminder + BOT) is a whatsapp bot built upon Twilio's APIs, ExpressJS and MongoDB. It can send reminders through text messages in whatsapp.</h4>
 
 <div align="center">
 <img src="https://raw.githubusercontent.com/pathakshashank17/Rebot/master/rebot.png?token=APNS3XZX2R75HMU6T26KMGC7GQE44" align="center" width="250px">
