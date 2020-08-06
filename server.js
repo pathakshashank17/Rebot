@@ -97,10 +97,10 @@ app.post("/incoming", (req, res) => {
                 const taskTime = isoString.slice(0, 16);
                 console.log("Reminder created for:", taskTime);
                 const taskInfo = new Reminder({
-                    taskName: md5(taskName),
+                    taskName: taskName,
                     taskTime: taskTime,
                     taskTimeOG: new Date(year, month, date, hours, minutes, 0, 0).toDateString().slice(0, 16) + " at " + new Date(year, month, date, hours, minutes, 0, 0).toTimeString().slice(0, 5),
-                    clientNumber: md5(clientNumber)
+                    clientNumber: clientNumber
                 });
                 taskInfo.save((err) => {
                     if (err) {
@@ -120,10 +120,10 @@ app.post("/incoming", (req, res) => {
                 const taskTime = isoString.slice(0, 16);
                 console.log("Reminder created for:", taskTime);
                 const taskInfo = new Reminder({
-                    taskName: md5(taskName),
+                    taskName: taskName,
                     taskTime: taskTime,
                     taskTimeOG: new Date(year, month, date, hours, minutes, 0, 0).toDateString().slice(0, 16) + " at " + new Date(year, month, date, hours, minutes, 0, 0).toTimeString().slice(0, 5),
-                    clientNumber: md5(clientNumber)
+                    clientNumber: clientNumber
                 });
                 taskInfo.save((err) => {
                     if (err) {
