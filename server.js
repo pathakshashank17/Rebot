@@ -49,7 +49,7 @@ cron.schedule('* * * * *', () => {
                         if (err) {
                             console.log(err);
                         } else {
-                            console.log(`Sent to ${task.clientNumber}`);
+                            console.log(`Sent a message!`);
                         }
                     });
             }, 1000);
@@ -89,12 +89,12 @@ app.post("/incoming", (req, res) => {
 
             // For today
             if (!query[3] || query[3] === "today") {
-                var month = new Date().getUTCMonth();
-                var date = new Date().getUTCDate();
+                const istString = moment.tz(new Date().toISOString(), "Asia/Kolkata").format().slice(0, 16);
+                var month = istString.slice(5, 7);
+                var date = istString.slice(8, 10);
                 const isoString = new Date(year, month, date, hours, minutes, 0, 0).toISOString();
-                console.log(isoString);
                 const taskTime = isoString.slice(0, 16);
-                console.log(taskTime);
+                console.log("Reminder created for:", taskTime);
                 const taskInfo = new Reminder({
                     taskName: taskName,
                     taskTime: taskTime,
@@ -116,9 +116,8 @@ app.post("/incoming", (req, res) => {
                 var date = parseInt(dateMonthString.split('/')[0]);
                 var month = parseInt(dateMonthString.split('/')[1]) - 1;
                 const isoString = new Date(year, month, date, hours, minutes, 0, 0).toISOString();
-                console.log(isoString);
                 const taskTime = isoString.slice(0, 16);
-                console.log(taskTime);
+                console.log("Reminder created for:", taskTime);
                 const taskInfo = new Reminder({
                     taskName: taskName,
                     taskTime: taskTime,
