@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const _ = require("lodash");
 const cron = require("node-cron");
 const moment = require("moment-timezone");
-const DateTime = require("luxon");
+const encrypt = require("mongoose-encryption");
 const app = express();
 const SID = process.env.SID;
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
@@ -25,6 +25,7 @@ const reminderSchema = new mongoose.Schema({
     taskTimeOG: String,
     clientNumber: String
 });
+reminderSchema.plugin(encrypt, { secret: process.env.SECRET, encryptedFields: ["taskName", "clientNumber"] });
 const Reminder = mongoose.model('Reminder', reminderSchema);
 
 // Searches the database for reminders per minute
@@ -96,10 +97,10 @@ app.post("/incoming", (req, res) => {
                 const taskTime = isoString.slice(0, 16);
                 console.log("Reminder created for:", taskTime);
                 const taskInfo = new Reminder({
-                    taskName: taskName,
+                    taskName: md5(taskName),
                     taskTime: taskTime,
                     taskTimeOG: new Date(year, month, date, hours, minutes, 0, 0).toDateString().slice(0, 16) + " at " + new Date(year, month, date, hours, minutes, 0, 0).toTimeString().slice(0, 5),
-                    clientNumber: clientNumber
+                    clientNumber: md5(clientNumber)
                 });
                 taskInfo.save((err) => {
                     if (err) {
@@ -119,10 +120,10 @@ app.post("/incoming", (req, res) => {
                 const taskTime = isoString.slice(0, 16);
                 console.log("Reminder created for:", taskTime);
                 const taskInfo = new Reminder({
-                    taskName: taskName,
+                    taskName: md5(taskName),
                     taskTime: taskTime,
                     taskTimeOG: new Date(year, month, date, hours, minutes, 0, 0).toDateString().slice(0, 16) + " at " + new Date(year, month, date, hours, minutes, 0, 0).toTimeString().slice(0, 5),
-                    clientNumber: clientNumber
+                    clientNumber: md5(clientNumber)
                 });
                 taskInfo.save((err) => {
                     if (err) {
