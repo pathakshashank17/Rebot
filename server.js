@@ -91,7 +91,7 @@ app.post("/incoming", (req, res) => {
                 const istString = moment.tz(new Date().toISOString(), "Asia/Kolkata").format().slice(0, 16);
                 var month = istString.slice(5, 7);
                 var date = istString.slice(8, 10);
-                const isoString = new Date(year, month, date, hours, minutes, 0, 0).toISOString();
+                const isoString = new Date(year, month - 1, date, hours, minutes, 0, 0).toISOString();
                 const taskTime = isoString.slice(0, 16);
                 console.log("Reminder created for:", taskTime);
                 const taskInfo = new Reminder({
