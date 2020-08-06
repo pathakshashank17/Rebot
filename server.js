@@ -41,7 +41,7 @@ cron.schedule('* * * * *', () => {
             var throttledFunction = _.throttle((task) => {
                 client.messages
                     .create({
-                        body: `Here's a reminder for *${task.taskName}*`,
+                        body: `Here's your reminder for *${task.taskName}*`,
                         from: "whatsapp:" + process.env.SERVER_NUMBER,
                         to: "whatsapp:" + task.clientNumber
                     }, (err, response) => {
@@ -116,7 +116,7 @@ app.post("/incoming", (req, res) => {
                 var month = parseInt(dateMonthString.split('/')[1]) - 1;
                 const isoString = new Date(year, month, date, hours, minutes, 0, 0).toISOString();
                 const taskTime = isoString.slice(0, 16);
-                console.log("Reminder created for:", taskTime);
+                console.log(`Reminder created for *${taskTime}*`);
                 const taskInfo = new Reminder({
                     taskName: taskName,
                     taskTime: taskTime,
@@ -127,7 +127,7 @@ app.post("/incoming", (req, res) => {
                     if (err) {
                         console.log(err)
                     } else {
-                        sendMessage(`Ok, will remind you about ${taskName}`, res);
+                        sendMessage(`Ok, will remind you about *${taskName}*`, res);
                     }
                 });
             }
@@ -145,7 +145,7 @@ app.post("/incoming", (req, res) => {
                 } else if (foundTasks.length) {
                     const upcomingTasks = [];
                     foundTasks.forEach((task) => {
-                        var subMessage = `${task.taskName} at ${task.taskTimeOG}`;
+                        var subMessage = `*${task.taskName}* at *${task.taskTimeOG}*`;
                         upcomingTasks.push(subMessage);
                     });
                     sendMessage(upcomingTasks.join('\n'), res);
@@ -155,7 +155,7 @@ app.post("/incoming", (req, res) => {
             }
         );
     } else {
-        sendMessage("I don't know what that means. Try _set_ or _view_", res);
+        sendMessage("I don't know what that means. Try *set* or *view*", res);
     }
 });
 
