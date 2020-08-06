@@ -14,7 +14,7 @@
 
 ### Setting up reminders
 - Send `set` to get a brief insight about usage.
-- The general format is `set <task-name (required)> <task-time (required)> <task-date> (optional)`. Replace angular brackets with the specified fields. Read more about parameters below :
+- The general format is `set <task-name (required)> <task-time (required)> <task-date (optional)>`. Replace angular brackets with the specified fields. Read more about parameters below :
   - `task-name`: **A required field**. Type the task that you want to be reminded about in **NO SPACES**.
   - `task-time`: **A required field**. Type the time you want to be reminded at in **24 HOUR** format.
   - `task-date`: **An optional field**. The default value is current date however you can also type here `today` if you want to put some extra efforts. For dates other than current date, type in **DD/MM** format.
