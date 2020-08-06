@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const _ = require("lodash");
 const cron = require("node-cron");
 const moment = require("moment-timezone");
-const encrypt = require("mongoose-encryption");
 const app = express();
 const SID = process.env.SID;
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
@@ -25,7 +24,6 @@ const reminderSchema = new mongoose.Schema({
     taskTimeOG: String,
     clientNumber: String
 });
-reminderSchema.plugin(encrypt, { secret: process.env.SECRET, encryptedFields: ["taskName", "clientNumber"] });
 const Reminder = mongoose.model('Reminder', reminderSchema);
 
 // Searches the database for reminders per minute
