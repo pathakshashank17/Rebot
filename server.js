@@ -159,6 +159,10 @@ app.post("/incoming", (req, res) => {
     }
 });
 
+app.get("/", (req, res) => {
+    res.send("Hi! You've just found the server of Rebot. Welcome");
+});
+
 app.listen(process.env.PORT || 3000, () => {
     console.log("Server started.");
 });
