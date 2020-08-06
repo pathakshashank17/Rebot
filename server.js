@@ -97,7 +97,7 @@ app.post("/incoming", (req, res) => {
                 const taskInfo = new Reminder({
                     taskName: taskName,
                     taskTime: taskTime,
-                    taskTimeOG: new Date(year, month - 1, date, hours, minutes, 0, 0).toDateString().slice(0, 16) + " at " + new Date(year, monthm - 1, date, hours, minutes, 0, 0).toTimeString().slice(0, 5),
+                    taskTimeOG: new Date(year, month - 1, date, hours, minutes, 0, 0).toDateString().slice(0, 16) + " at " + new Date(year, month - 1, date, hours, minutes, 0, 0).toTimeString().slice(0, 5),
                     clientNumber: clientNumber
                 });
                 taskInfo.save((err) => {
