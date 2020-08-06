@@ -9,7 +9,7 @@
 <h1 align="center">Usage</h2>
 
 ### Set Up
-- Scan the QR code on the top of this guide. This will open up whatsapp on your mobile / PC.
+- Scan the QR code on the top of this guide or [Click Here](https://uqr.to/khyn). This will open up whatsapp on your mobile / PC.
 - The invitation text has already been filled into the message box, just send the message and you are in! 🎉.
 
 ### Setting up reminders
