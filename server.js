@@ -77,7 +77,7 @@ app.post("/incoming", (req, res) => {
     if (action === "set") {
         // Send instructions
         if (!query[1]) {
-            sendMessage("Format: \n *set* _task(required, no spaces)_ _time(required)_ _date(optional, in DD/MM format, default is today)_", res);
+            sendMessage("Format: \n *set* _task(required, no spaces)_ _time(required, in HHMM format)_ _date(optional, in DD/MM format, default is today)_", res);
         }
         else {
 
