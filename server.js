@@ -110,7 +110,7 @@ app.post("/incoming", (req, res) => {
                         }
                     });
                 } else {
-                    sendMessage("Please enter valid inputs and try again", res);
+                    sendMessage("Please enter valid inputs and try again. Possible error: *Inputs not according to specified format* or *Reminder time given in past* (I hope you know time travel isn't possible yet)", res);
                 }
             }
 
@@ -137,7 +137,7 @@ app.post("/incoming", (req, res) => {
                         }
                     });
                 } else {
-                    sendMessage("Please enter valid inputs and try again", res);
+                    sendMessage("Please enter valid inputs and try again. Possible error: *Inputs not according to specified format* or *Reminder time given in past* (I hope you know time travel isn't possible yet)", res);
                 }
             }
         }
