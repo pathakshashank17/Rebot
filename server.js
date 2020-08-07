@@ -10,7 +10,7 @@ const app = express();
 const SID = process.env.SID;
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
 const client = new twilio(SID, AUTH_TOKEN);
-const { extractClientNumber, sendMessage } = require("./utils/utils.js");
+const { extractClientNumber, sendMessage, testInput } = require("./utils/utils.js");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -80,6 +80,7 @@ app.post("/incoming", (req, res) => {
             sendMessage("Format: \n *set* _task(required, no spaces)_ _time(required)_ _date(optional, in DD/MM format, default is today)_", res);
         }
         else {
+
             const taskName = query[1];
             const time = query[2];
             var hours = parseInt(time.slice(0, 2));
@@ -88,48 +89,56 @@ app.post("/incoming", (req, res) => {
 
             // For today
             if (!query[3] || query[3] === "today") {
-                const istString = moment.tz(new Date().toISOString(), "Asia/Kolkata").format().slice(0, 16);
-                var month = istString.slice(5, 7);
-                var date = istString.slice(8, 10);
-                const isoString = new Date(year, month - 1, date, hours, minutes, 0, 0).toISOString();
-                const taskTime = isoString.slice(0, 16);
-                console.log("Reminder created for:", taskTime);
-                const taskInfo = new Reminder({
-                    taskName: taskName,
-                    taskTime: taskTime,
-                    taskTimeOG: new Date(year, month - 1, date, hours, minutes, 0, 0).toDateString().slice(0, 16) + " at " + new Date(year, month - 1, date, hours, minutes, 0, 0).toTimeString().slice(0, 5),
-                    clientNumber: clientNumber
-                });
-                taskInfo.save((err) => {
-                    if (err) {
-                        console.log(err)
-                    } else {
-                        sendMessage(`Ok, will remind about *${taskName}*`, res);
-                    }
-                });
+                if (testInput(query) === 1) {
+                    const istString = moment.tz(new Date().toISOString(), "Asia/Kolkata").format().slice(0, 16);
+                    var month = istString.slice(5, 7);
+                    var date = istString.slice(8, 10);
+                    const isoString = new Date(year, month - 1, date, hours, minutes, 0, 0).toISOString();
+                    const taskTime = isoString.slice(0, 16);
+                    console.log("Reminder created for:", taskTime);
+                    const taskInfo = new Reminder({
+                        taskName: taskName,
+                        taskTime: taskTime,
+                        taskTimeOG: new Date(year, month - 1, date, hours, minutes, 0, 0).toDateString().slice(0, 16) + " at " + new Date(year, month - 1, date, hours, minutes, 0, 0).toTimeString().slice(0, 5),
+                        clientNumber: clientNumber
+                    });
+                    taskInfo.save((err) => {
+                        if (err) {
+                            console.log(err)
+                        } else {
+                            sendMessage(`Ok, will remind about *${taskName}*`, res);
+                        }
+                    });
+                } else {
+                    sendMessage("Please enter valid inputs and try again", res);
+                }
             }
 
             // For any day
             else {
-                const dateMonthString = query[3];
-                var date = parseInt(dateMonthString.split('/')[0]);
-                var month = parseInt(dateMonthString.split('/')[1]) - 1;
-                const isoString = new Date(year, month, date, hours, minutes, 0, 0).toISOString();
-                const taskTime = isoString.slice(0, 16);
-                console.log(`Reminder created for *${taskTime}*`);
-                const taskInfo = new Reminder({
-                    taskName: taskName,
-                    taskTime: taskTime,
-                    taskTimeOG: new Date(year, month, date, hours, minutes, 0, 0).toDateString().slice(0, 16) + " at " + new Date(year, month, date, hours, minutes, 0, 0).toTimeString().slice(0, 5),
-                    clientNumber: clientNumber
-                });
-                taskInfo.save((err) => {
-                    if (err) {
-                        console.log(err)
-                    } else {
-                        sendMessage(`Ok, will remind you about *${taskName}*`, res);
-                    }
-                });
+                if (testInput(query) === 2) {
+                    const dateMonthString = query[3];
+                    var date = parseInt(dateMonthString.split('/')[0]);
+                    var month = parseInt(dateMonthString.split('/')[1]) - 1;
+                    const isoString = new Date(year, month, date, hours, minutes, 0, 0).toISOString();
+                    const taskTime = isoString.slice(0, 16);
+                    console.log(`Reminder created for *${taskTime}*`);
+                    const taskInfo = new Reminder({
+                        taskName: taskName,
+                        taskTime: taskTime,
+                        taskTimeOG: new Date(year, month, date, hours, minutes, 0, 0).toDateString().slice(0, 16) + " at " + new Date(year, month, date, hours, minutes, 0, 0).toTimeString().slice(0, 5),
+                        clientNumber: clientNumber
+                    });
+                    taskInfo.save((err) => {
+                        if (err) {
+                            console.log(err)
+                        } else {
+                            sendMessage(`Ok, will remind you about *${taskName}*`, res);
+                        }
+                    });
+                } else {
+                    sendMessage("Please enter valid inputs and try again", res);
+                }
             }
         }
     }
