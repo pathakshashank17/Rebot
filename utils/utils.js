@@ -23,9 +23,13 @@ module.exports = {
         // Check time
         if (query[2]) {
             const time = query[2];
+            const dateMonth = query[3];
+            const date = parseInt(dateMonth.split('/')[0]);
             const hour = parseInt(time.slice(0, 2));
             const minute = parseInt(time.slice(2, 4));
             if (hour <= 24 && hour >= 0 && minute >= 0 && minute <= 59 && hour >= currHour && minute > currMinute) {
+                testValue++;
+            } else if (hour <= 24 && hour >= 0 && minute >= 0 && minute <= 59 && date > currDate) {
                 testValue++;
             }
         }
