@@ -27,6 +27,6 @@
 - Returns a message to first set up some reminders if not done so.
 
 ### Warning
-Just like me, this bot is lazy 🦥 and needs to sleep 😴 0000 to 0600 (IST) everyday (due to Heroku's policies). So try **NOT** to set any reminders for the above timings. Also Twilio's WhatsApp API is in beta which may cause issues or even stop working all together.
+Just like me, this bot is lazy 🦥 and needs to sleep 😴 0000 to 0600 (IST) everyday (due to Heroku's policies). So try **NOT** to set any reminders for the above timings. Also Twilio's WhatsApp API is in beta which may cause issues or even stop working all together. **Also this project is eventually destined to be sun-setted after the trial balance of Twilio is over**.
 
 <p align="center">All contributions and issues are welcome 🤗.</p>
