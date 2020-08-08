@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require("express");
 const twilio = require("twilio");
 const mongoose = require("mongoose");
+const encrypt = require("mongoose-encryption");
 const bodyParser = require('body-parser');
 const _ = require("lodash");
 const cron = require("node-cron");
@@ -23,6 +24,10 @@ const reminderSchema = new mongoose.Schema({
     taskTime: String,
     taskTimeOG: String,
     clientNumber: String
+});
+reminderSchema.plugin(encrypt, {
+    secret: process.env.SECRET,
+    encryptedFields: ['taskTitle']
 });
 const Reminder = mongoose.model('Reminder', reminderSchema);
 
