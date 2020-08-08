@@ -24,6 +24,7 @@ module.exports = {
             const date = istString.slice(8, 10);
             const userString = new Date(year, month, date, hour, minutes, 0, 0).toISOString();
             const userEpoch = Date.parse(userString);
+            console.log(currEpoch, userEpoch);
             if (userEpoch > currEpoch) {
                 return true;
             }
@@ -33,6 +34,7 @@ module.exports = {
             const date = query[3].split('/')[0];
             const userString = new Date(year, month, date, hour, minutes, 0, 0).toISOString();
             const userEpoch = Date.parse(userString);
+            console.log(currEpoch, userEpoch);
             if (userEpoch > currEpoch) {
                 return true;
             }
