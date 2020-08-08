@@ -89,7 +89,7 @@ app.post("/incoming", (req, res) => {
 
             // For today
             if (!query[3] || query[3] === "today") {
-                if (testInput(query) === 1) {
+                if (testInput(query)) {
                     const istString = moment.tz(new Date().toISOString(), "Asia/Kolkata").format().slice(0, 16);
                     var month = istString.slice(5, 7);
                     var date = istString.slice(8, 10);
@@ -116,7 +116,7 @@ app.post("/incoming", (req, res) => {
 
             // For any day
             else {
-                if (testInput(query) === 2) {
+                if (testInput(query)) {
                     const dateMonthString = query[3];
                     var date = parseInt(dateMonthString.split('/')[0]);
                     var month = parseInt(dateMonthString.split('/')[1]) - 1;

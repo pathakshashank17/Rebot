@@ -15,34 +15,28 @@ module.exports = {
     testInput: (query) => {
         var testValue = 0;
         const istString = moment.tz(new Date().toISOString(), "Asia/Kolkata").format().slice(0, 16);
-        var currMonth = istString.slice(5, 7);
-        var currDate = istString.slice(8, 10);
-        var currHour = istString.slice(11, 13);
-        var currMinute = istString.slice(14, 16);
-
-        // Check time
-        if (query[2]) {
-            const time = query[2];
-            const dateMonth = query[3];
-            const date = parseInt(dateMonth.split('/')[0]);
-            const hour = parseInt(time.slice(0, 2));
-            const minute = parseInt(time.slice(2, 4));
-            if (hour <= 24 && hour >= 0 && minute >= 0 && minute <= 59 && hour >= currHour && minute > currMinute) {
-                testValue++;
-            } else if (hour <= 24 && hour >= 0 && minute >= 0 && minute <= 59 && date > currDate) {
-                testValue++;
+        const currEpoch = Date.parse(istString);
+        const hour = query[2].slice(0, 2);
+        const minutes = query[2].slice(2, 4);
+        if (!query[3] || query[3] === "today") {
+            const year = istString.slice(0, 4);
+            const month = istString.slice(5, 7);
+            const date = istString.slice(8, 10);
+            const userString = new Date(year, month, date, hour, minutes, 0, 0).toISOString();
+            const userEpoch = Date.parse(userString);
+            if (userEpoch > currEpoch) {
+                return true;
+            }
+        } else {
+            const year = istString.slice(0, 4);
+            const month = query[3].split('/')[1];
+            const date = query[3].split('/')[0];
+            const userString = new Date(year, month, date, hour, minutes, 0, 0).toISOString();
+            const userEpoch = Date.parse(userString);
+            if (userEpoch > currEpoch) {
+                return true;
             }
         }
-
-        // Check date
-        if (query[3]) {
-            const dateMonth = query[3];
-            const date = parseInt(dateMonth.split('/')[0]);
-            const month = parseInt(dateMonth.split('/')[1]);
-            if (date >= 1 && date <= 31 && month >= 1 && month <= 12 && date >= currDate && month >= currMonth) {
-                testValue++;
-            }
-        }
-        return testValue;
+        return false;
     }
 };
