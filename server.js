@@ -95,7 +95,7 @@ app.post("/incoming", (req, res) => {
                     var date = istString.slice(8, 10);
                     const isoString = new Date(year, month - 1, date, hours, minutes, 0, 0).toISOString();
                     const taskTime = isoString.slice(0, 16);
-                    console.log("Reminder created for:", taskTime);
+                    console.log(`Reminder created for: ${taskTime}`);
                     const taskInfo = new Reminder({
                         taskName: taskName,
                         taskTime: taskTime,

@@ -14,27 +14,25 @@ module.exports = {
     },
     testInput: (query) => {
         var testValue = 0;
-        const istString = moment.tz(new Date().toISOString(), "Asia/Kolkata").format().slice(0, 16);
+        const istString = moment.tz(new Date().toISOString(), "Asia/Kolkata").format().slice(0, 16) + ":00.000Z";
         const currEpoch = Date.parse(istString);
         const hour = query[2].slice(0, 2);
         const minutes = query[2].slice(2, 4);
         if (!query[3] || query[3] === "today") {
             const year = istString.slice(0, 4);
-            const month = istString.slice(5, 7);
+            const month = istString.slice(5, 7) - 1;
             const date = istString.slice(8, 10);
             const userString = new Date(year, month, date, hour, minutes, 0, 0).toISOString();
             const userEpoch = Date.parse(userString);
-            console.log(currEpoch, userEpoch);
             if (userEpoch > currEpoch) {
                 return true;
             }
         } else {
             const year = istString.slice(0, 4);
-            const month = query[3].split('/')[1];
+            const month = query[3].split('/')[1] - 1;
             const date = query[3].split('/')[0];
             const userString = new Date(year, month, date, hour, minutes, 0, 0).toISOString();
             const userEpoch = Date.parse(userString);
-            console.log(currEpoch, userEpoch);
             if (userEpoch > currEpoch) {
                 return true;
             }
