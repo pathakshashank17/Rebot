@@ -27,7 +27,7 @@ const reminderSchema = new mongoose.Schema({
 });
 reminderSchema.plugin(encrypt, {
     secret: process.env.SECRET,
-    encryptedFields: ['taskTitle']
+    encryptedFields: ['taskName']
 });
 const Reminder = mongoose.model('Reminder', reminderSchema);
 
