@@ -13,9 +13,16 @@ module.exports = {
         res.end(twiml.toString());
     },
     testInput: (query) => {
-        var testValue = 0;
         const istString = moment.tz(new Date().toISOString(), "Asia/Kolkata").format().slice(0, 16) + ":00.000Z";
         const currEpoch = Date.parse(istString);
+        if (query[2].length !== 4) {    // Checking if time is not in HHMM format
+            return false;
+        }
+        if (query[3] && query[3] !== "today") {     // Checking if date-month is not in DD/MM format
+            if (query[3].split('/').length !== 2) {
+                return false;
+            }
+        }
         const hour = query[2].slice(0, 2);
         const minutes = query[2].slice(2, 4);
         if (!query[3] || query[3] === "today") {
@@ -24,7 +31,7 @@ module.exports = {
             const date = istString.slice(8, 10);
             const userString = new Date(year, month, date, hour, minutes, 0, 0).toISOString();
             const userEpoch = Date.parse(userString);
-            if (userEpoch > currEpoch) {
+            if (userEpoch > currEpoch) {    // Checking if user input not in past
                 return true;
             }
         } else {
@@ -33,7 +40,7 @@ module.exports = {
             const date = query[3].split('/')[0];
             const userString = new Date(year, month, date, hour, minutes, 0, 0).toISOString();
             const userEpoch = Date.parse(userString);
-            if (userEpoch > currEpoch) {
+            if (userEpoch > currEpoch) {    // Checking if user input not in past
                 return true;
             }
         }
