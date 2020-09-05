@@ -2,14 +2,14 @@
 
 <h4 align="center">Rebot (REminder + BOT) is a whatsapp bot built upon Twilio's APIs, ExpressJS and MongoDB. It can send reminders through text messages in whatsapp.</h4>
 
-<div align="center">
+<!-- <div align="center">
 <img src="./rebot.svg" align="center" width="250px">
-</div>
+</div> -->
 
 <h1 align="center">Usage</h2>
 
 ### Set Up
-- Scan the QR code on the top of this guide or [Click Here](https://uqr.to/ksom). This will open up whatsapp on your mobile / PC.
+- Scan the QR code on the top of this guide or [Click Here](https://wa.me/+14155238886?text=join%20electricity-army). This will open up whatsapp on your mobile / PC.
 - The invitation text has already been filled into the message box, just send the message and you are in! 🎉.
 
 ### Setting up reminders
