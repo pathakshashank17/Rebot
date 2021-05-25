@@ -18,10 +18,10 @@
     "md5": "^2.3.0",
     "moment": "^2.27.0",
     "moment-timezone": "^0.5.31",
-    "mongoose": "^5.9.27",
+    "mongoose": "^5.12.11",
     "mongoose-encryption": "^2.0.2",
     "ngrok": "^3.2.7",
     "node-cron": "^2.0.3",
-    "twilio": "^3.48.1"
+    "twilio": "^3.63.0"
   }
 }
