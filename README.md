@@ -9,7 +9,7 @@
 <h1 align="center">Usage</h2>
 
 ### Set Up
-- [Click on this link](https://wa.me/+14155238886?text=join%20electricity-army). This will open up whatsapp on your mobile / PC.
+- [Click on this link](https://wa.me/+14155238886?text=join%20think-themselves). This will open up whatsapp on your mobile / PC.
 - The invitation text has already been filled into the message box, just send the message and you are in! 🎉.
 
 ### Setting up reminders
